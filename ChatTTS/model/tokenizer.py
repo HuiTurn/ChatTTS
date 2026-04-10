@@ -53,7 +53,11 @@ class Tokenizer:
 
         # avoid random speaker embedding of tokenizer in the other dims
         for t in text:
-            encode_plus = self._tokenizer.encode_plus if hasattr(self._tokenizer, "encode_plus") else self._tokenizer._encode_plus
+            encode_plus = (
+                self._tokenizer.encode_plus
+                if hasattr(self._tokenizer, "encode_plus")
+                else self._tokenizer._encode_plus
+            )
             x = encode_plus(
                 t, return_tensors="pt", add_special_tokens=False, padding=True
             )
